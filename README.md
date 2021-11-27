@@ -1,4 +1,4 @@
-# CZ4041-Applied-Crypto
+# CZ4010-Applied-Crypto
 
 clone this repo <br />
 go to openssl.cnf and change the dir name to your directory <br />
