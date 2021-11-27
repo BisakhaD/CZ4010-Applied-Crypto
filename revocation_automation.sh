@@ -8,7 +8,7 @@ cd bob
 openssl genrsa -out bob@example.com.key.pem 2048
 openssl req -new -key bob@example.com.key.pem -out bob@example.com.csr.pem
 
-mv bob@example.com.key.pem intermediate/csr/bob@example.com.csr.pem
+mv bob/bob@example.com.csr.pem intermediate/csr/bob@example.com.csr.pem
 
 cd ..
 openssl ca -config intermediate/openssl.cnf -extensions usr_cert -notext -md sha256 -in intermediate/csr/bob@example.com.csr.pem -out intermediate/certs/bob@example.com.cert.pem
