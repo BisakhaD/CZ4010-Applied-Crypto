@@ -80,7 +80,7 @@ The primary files present in the Github Repo are:
 5. If one wants to create a CA, they can run ``` ./main.sh  ```, else if they want to enter as a client, they can run ``` ./client.sh  ```
 
 ### Some test case examples 
-This project is fully functional, to the extent tested by us. If you are able to find ways for us to improve, please do not hesitate to drop us an email at ```bisakha001@e.ntu.edu.sg``` or ```ahkshara001@e.ntu.edu.sg```, so that we can learn from our mistakes :)
+This project is fully functional, to the extent tested by us. If you are able to find ways for us to improve, please do not hesitate to drop us an email at ```[bisakha001@e.ntu.edu.sg](mailto:bisakha001@e.ntu.edu.sg)``` or ```ahkshara001@e.ntu.edu.sg```, so that we can learn from our mistakes :)
 
 Here we have tried to list down some of the edge error cases:
 1. Initializing intermediate expiry date as longer than that of root CA
