@@ -23,49 +23,40 @@ At first, we decided to diverge beyond the course curriculum and try different e
 We also understood that there was no better way to show off our newfound expertise from this course than to apply it to our project.
 
 ## Research
-Confidentiality, Integrity, Non-repudiation and Authentication are critical concepts revolving around computer security. Public Key Infrastructure (PKI) is a system that achieves the aforementioned security services. Thus, the goal of this project was to implement a certification authority system that can generate and distribute public key certificates. Certification Authority is an entity that issues digital certificates as a validation of the client’s identity. Without this, anything done online will be unsafe and all data entered on an online web service can be obtained by hackers. Every year, millions of digital certificates are issued by certification authorities. Typically, the certificate authorities must fulfill rigorous requirements to get approval from browsers, operating systems and other digital platforms. Upon this approval, any digital certificate signed by this CA is openly trusted. However, the CA does a few checks regarding the identity of the client before signing their certificate. 
+**Confidentiality**, **Integrity**, **Non-repudiation** and **Authentication** are critical concepts revolving around computer security. Public Key Infrastructure (PKI) is a system that achieves the aforementioned security services. Thus, the goal of this project was to implement a certification authority system that can generate and distribute public key certificates. Certification Authority is an entity that issues digital certificates as a validation of the client’s identity. Without this, anything done online will be unsafe and all data entered on an online web service can be obtained by hackers. Every year, millions of digital certificates are issued by certification authorities. Typically, the certificate authorities must fulfill rigorous requirements to get approval from browsers, operating systems and other digital platforms. Upon this approval, any digital certificate signed by this CA is openly trusted. However, the CA does a few checks regarding the identity of the client before signing their certificate. 
 
-![image](https://user-images.githubusercontent.com/44110423/143767043-23eaa631-e377-4a09-9224-69551d6eba67.png)
+<img width="655" alt="image" src="https://user-images.githubusercontent.com/56753634/143767104-3e7801a3-fa66-4d2b-a29a-a771a450f2c3.png">
 
 CAs usually have a root CA certificate. However, this root CA certificate will not be used to sign server or client certificates and instead will be used to create one or more intermediate CAs, which are trusted by the root CA to sign certificates on their behalf. This ensures the safety of the root CA and prevents any compromise of the root key as this way it could be kept offline and unused. This hierarchy in certificates is called a trusting hierarchy. 
 
 These certificates created by the CA usually employ the Rivest–Shamir–Adleman (RSA) algorithm, which is based on the factorization of large numbers. Another popular encryption algorithm that is gaining prominence is the elliptic curve encryption algorithm. The elliptic curve algorithm is based on a cube equation and provides stronger security than RSA for a substantially smaller key length. Though other encryption algorithms were researched during the course of this project, as mentioned in motivations, we finally went ahead with RSA and Elliptic Curves.
 
 ## Design and Development
-The entire application was developed using the **shell** **script**. As mentioned earlier, this project was designed with 2 roles in mind - **host** and **client**. Thus the project has 2 databases, one for the client and the other for the host. Trusting hierarchies are implemented by prompting the user to create an intermediate CA certificate instantly upon the creation of a root CA certificate. The client/host are given a choice regarding the encryption key - Rivest–Shamir–Adleman (**RSA**) and Elliptic Curve (**EC**). Both the keys are implemented along with Advanced Encryption Standard 256 (**AES-256**). For the EC encryption key, we have implemented the prime256v1 elliptic curve as it is one of the most interoperable and supports a wide range of clients. Further, Secure Hash Algorithm 256 (**SHA-256**) was used as the hashing algorithm due to its secure characteristics such as having an avalanche effect where a small change in original data leads to a large change in hash value such that the similarity between data cannot be identified. 
+The entire application was developed using the **shell** **script**. OpenSSL, a free and open-source library with a number of command-line utilities for working with digital certificates, was used in the development. 
 
+As mentioned earlier, this project was designed with 2 roles in mind - **certification authority** and **client**. Thus the project has 2 databases, one for the client and the other for the host. 
 
-## How to install and run the project?
-1. Clone the repository
-2. Go to the **openssl.cnf** file and change the directory path to the location of your folder <br/>
-3. Go to **intermediate/openssl.cnf** and change the directory path similar to step 1
-4. Open terminal and grant permission for all files by running **chmod +x (file name)**. For example for the **main.sh** file the command would be: <br/> ``` chmod +x ./main.sh ``` <br />
-5. Follow the following instructions based on the role (host/client).
+Acting as a certificate authority (CA) means dealing with cryptographic pairs of private keys and public certificates. Firstly the root key and certificate pair was created, which acted as the identity of the root CA. However, the root CA does not sign any server or client certificates directly. The root CA is utilised to create one or more intermediate or subordinate CAs, which signs on their behalf. This is the best practice as it allows the root CA to be kept offline and unused as much as the possible, as any compromise of the root key can end up being catastrophic. Therefore, trusting hierarchies were implemented by prompting the user to create an intermediate CA certificate instantly upon the creation of a root CA certificate. The root CA gives the signature for the intermediate CA. Thereafter, all certificate signing requests are fulfilled by the intermediate CA. This can be seen in the screenshot below. 
 
+<img width="776" alt="image" src="https://user-images.githubusercontent.com/56753634/143767203-aee43d65-599c-4786-abf5-0a3583468a87.png">
 
-### Role of a Host:
+The client/CA are given a choice regarding the encryption key - Rivest–Shamir–Adleman (**RSA**) and Elliptic Curve (**EC**). Both the keys are implemented along with Advanced Encryption Standard 256 (**AES-256**). For the EC encryption key, we have implemented the prime256v1 elliptic curve as it is one of the most interoperable and supports a wide range of clients. Further, Secure Hash Algorithm 256 (**SHA-256**) was used as the hashing algorithm due to its secure characteristics such as having an avalanche effect where a small change in original data leads to a large change in hash value such that the similarity between data cannot be identified. 
+
+### Role of a CA:
 1. Create a root and intermediate CA by running <br/>  ``` ./main.sh  ```
-2. For the creation of root and intermediate CA certificates, the host can select their choice of the encryption key (RSA/EC) and will then have to set up passwords for each of them and choose the time period of validity (e.g: 3750 days will be 10 years of validity). The expiry of the intermediate CA certificate should be earlier than the root CA. If the host types a longer time period of validity for the intermediate CA certificate in comparison to the root CA certificate, the system will automatically set the validity of the intermediate CA certificate to that of the root CA certificate. For the generation of the intermediate CA certificate, a signature from the root CA certificate is required.   
-3. Upon creation of a root and intermediate CA certificate, these are the following actions a host can perform:
+2. For the creation of root and intermediate CA certificates, the host can select their choice of the encryption key (RSA/EC) and will then have to set up passwords for each of them and choose the time period of validity (e.g: 3750 days will be 10 years of validity). Certain conditions which are required to be met:
+    *The expiry of the intermediate CA certificate should be earlier than the root CA. If the host types a longer time period of validity for the intermediate CA certificate in comparison to the root CA certificate, the system will automatically set the validity of the intermediate CA certificate to that of the root CA certificate. For the generation of the intermediate CA certificate, a signature from the root CA certificate is required.   
+4. Upon creation of a root and intermediate CA certificate, these are the following actions a host can perform:
     - Check of the chain of command is intact
     - View all certificates
     - Sign a certificate
     - Revoke a signature
 
-
 ### Role of a Client:
 1. Create a certificate to be signed; Similar to the host, the client can also choose an encryption key between RSA and EC. They will also have to set up passwords, select a validity period and enter some details such as the country code, state, locality, common name etc. While some of these fields such as common names are necessary some of them can be skipped. Additionally, the client has to also provide a domain name for their certificate. 
 2. Verify a certificate was signed by a CA; the client can just type the domain name of the certificate and verify if it has been signed by the CA. 
 
-
-## What makes our project unique?
-1. Simple console - the user (host/client) can easily access all the actions they wish to perform.
-2. Autonomy for the users - Both the host and client have a choice regarding the encryption key. They can choose between an RSA or EC encryption key. Moreover, the user can decide how long they would like their certificate to be valid.
-3. Trusting Hierarchy - Upon the creation of the root CA certificate, the console instantly prompts the host to create an intermediate CA certificate. This ensures the safety of the root CA certificate. 
-4. Informative Messages - The entire console is filled with informative messages that guide the user throughout making the application user friendly. 
-
-
-## The files in this github repository & what they do:
+### The files in this github repository & what they do:
 The primary files present in the Github Repo are:
 1. **main.sh** : file to be run by the host.
 2. **client.sh** : file to be run by the client.
@@ -76,8 +67,23 @@ The primary files present in the Github Repo are:
 7. **sign_cert_automation.sh** : file for signing a certificate on the host side. The purpose.sh file calls this file when the host choses to sign a certificate.
 8. **revocation_automation.sh** : file for revoking a signature. The purpose.sh file calls this file while the host selects to revoke a signature. 
 
+### How to install and run the project?
+1. Clone the repository
+2. Go to the **openssl.cnf** file and change the directory path to the location of your folder <br/>
+3. Go to **intermediate/openssl.cnf** and change the directory path similar to step 1
+4. Open terminal and grant permission for all files by running **chmod +x (file name)**. For example for the **main.sh** file the command would be: <br/> ``` chmod +x ./main.sh ``` <br />
+5. Follow the following instructions based on the role (host/client).
+
+## What makes our project unique?
+1. Simple console - the user (host/client) can easily access all the actions they wish to perform.
+2. Autonomy for the users - Both the host and client have a choice regarding the encryption key. They can choose between an RSA or EC encryption key. Moreover, the user can decide how long they would like their certificate to be valid.
+3. Trusting Hierarchy - Upon the creation of the root CA certificate, the console instantly prompts the host to create an intermediate CA certificate. This ensures the safety of the root CA certificate. 
+4. Informative Messages - The entire console is filled with informative messages that guide the user throughout making the application user friendly. 
+
+
 ## References 
 1: Aas, Josh, et al. "Let's Encrypt: an automated certificate authority to encrypt the entire web." Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019. <br/>
 2: Al-Janabi, Sufyan Faraj, and Amer Kais Obaid. "Development of certificate authority services for web applications." 2012 International Conference on Future Communication Networks. IEEE, 2012.  <br/>
 3: Dong, Y., et al. "Providing distributed certificate authority service in mobile ad hoc networks." First International Conference on Security and Privacy for Emerging Areas in Communications Networks (SECURECOMM'05). IEEE, 2005.  <br/>
 4: Cano, Maria-Dolores, Ruben Toledo-Valera, and Fernando Cerdan. "A certification authority for elliptic curve X. 509v3 certificates." International Conference on Networking and Services (ICNS'07). IEEE, 2007.  <br/>
+5: OpenSSL Foundation, I. (n.d.). OpenSSL. /index.html. Retrieved November 28, 2021, from https://www.openssl.org/. <br/>
