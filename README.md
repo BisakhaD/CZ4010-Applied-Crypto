@@ -7,6 +7,17 @@ There are 2 roles and databases involved in this project - client and host. The 
 
 The client has to run the **client.sh file** and the host runs the **main.sh** file. 
 
+## Motivation
+
+
+
+## Research
+
+
+## Design and Development
+The entire application was developed using the **shell** **script**. As mentioned earlier, this project was designed with 2 roles in mind - **host** and **client**. Thus the project has 2 databases, one for the client and the other for the host. Trusting hierachies are implemented by prompting the user to create an intermediate CA certificate instantly upon the creation of a root CA certificate. The client/host are given a choice regarding the encryption key - RSA and EC. For RSA, we are using 
+
+
 ## How to install and run the project?
 1. Clone the repository
 2. Go to the **openssl.cnf** file and change the directory path to the location of your folder <br/>
