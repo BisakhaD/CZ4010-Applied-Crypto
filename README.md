@@ -5,6 +5,10 @@ This project deals with the implementation of a certification authority using RS
 
 There are 2 roles and databases involved in this project - client and host. The client can both create a certificate they would like a signature for and verify a certificate was signed by the CA. Once the client creates a certificate that requires a signature, they send a request for signature to the host. The host has to first create a root and intermediate CA. The root CA certificate is a self-signed certificate. Thus, the issuer and subject will be the same for this certificate. However,  the intermediate CA certificate will be signed by the root CA certificate. Upon the creation of root and intermediate CA, the intermediate CA can be used to sign the required certificates. Additionally upon signing a certificate, the host can even revoke the signature. This will be updated in the database accordingly.  
 
+To explain, how our project works in layman terms we came up with an analogy. 
+
+BD is a girl who is forgetful and someone who cannot keep secrets or gossips whereas AS is someone who loves keeping secrets and never forgets them. One day, BD hears of a gossip and wishes to verify if the information she has heard can be considered as gossip. Thus, she tells this information to AS who verifies if the information can be considered as gossip. Once AS, hears the information and realises it is gossip infact, she gives a thumbs up to BD approving her information as gossip.
+
 The client has to run the **client.sh file** and the host runs the **main.sh** file. 
 
 ## Motivation
@@ -15,7 +19,7 @@ The client has to run the **client.sh file** and the host runs the **main.sh** f
 
 
 ## Design and Development
-The entire application was developed using the **shell** **script**. As mentioned earlier, this project was designed with 2 roles in mind - **host** and **client**. Thus the project has 2 databases, one for the client and the other for the host. Trusting hierachies are implemented by prompting the user to create an intermediate CA certificate instantly upon the creation of a root CA certificate. The client/host are given a choice regarding the encryption key - RSA and EC. For RSA, we are using 
+The entire application was developed using the **shell** **script**. As mentioned earlier, this project was designed with 2 roles in mind - **host** and **client**. Thus the project has 2 databases, one for the client and the other for the host. Trusting hierachies are implemented by prompting the user to create an intermediate CA certificate instantly upon the creation of a root CA certificate. The client/host are given a choice regarding the encryption key - Rivest–Shamir–Adleman (**RSA**) and Elliptic Curve (**EC**). Both the keys are implemented along with Advanced Encryption Standard 256 (**AES-256**). For the EC encryption key, we have implemented the prime256v1 elliptic curve as it is one of the most interoperable and supports a wide range of clients. Further, Secure Hash Algorithm 256 (**SHA-256**) was used as the hashing algorithm due to its secure characteristics such as having an avalanche effect where a small change in original data leads to a large change in hash value such that the similarity between data cannot be identified. 
 
 
 ## How to install and run the project?
@@ -23,7 +27,7 @@ The entire application was developed using the **shell** **script**. As mentione
 2. Go to the **openssl.cnf** file and change the directory path to the location of your folder <br/>
 3. Go to **intermediate/openssl.cnf** and change the directory path similar to step 1
 4. Open terminal and grant permission for all files by running **chmod +x (file name)**. For example for the **main.sh** file the command would be: <br/> ``` chmod +x ./main.sh ``` <br />
-5. Follow the following instructions based on the role you choose:
+5. Follow the following instructions based on the role (host/client).
 
 
 ### Role of a Host:
@@ -41,7 +45,7 @@ The entire application was developed using the **shell** **script**. As mentione
 3. Verify a certificate was signed by a CA; the client can just type the domain name of the certifiate and verify if it has been signed by the CA. 
 
 
-## The files in the repo & what they do:
+## The files in this github repository & what they do:
 The primary files present in the github repo are:
 1. **main.sh** : file to be run by the host.
 2. **client.sh** : file to be run by the client.
