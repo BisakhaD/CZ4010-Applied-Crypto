@@ -1,4 +1,5 @@
 # Implementing a Certification Authority
+<img width="979" alt="image" src="https://user-images.githubusercontent.com/56753634/143765079-d488ed30-78ae-4024-83c6-6715f05b90d3.png">
 
 ## Project Description
 This project deals with the implementation of a certification authority using RSA and Elliptic Curves (EC) as the encryption key and SHA-256 as the hashing algorithm. Firstly, a root certification authority (CA) is created. To implement trusting hierarchies, and safeguard the root CA, the host is prompted to create an intermediate CA automatically. This intermediate CA is used to sign other certifications on the behalf of the root ca. Moreover, a simple console is created to allow hosts to easily access the various functions and actions they can perform such as viewing certificates, signing them and even revoking signatures. 
