@@ -1,7 +1,7 @@
 # Implementing a Certification Authority
 
 ## Project Description
-This project deals with the implementation of a certification authority using RSA and Elliptic Curves (EC) as the encryption key and SHA-256 as the hashing algorithm.  Firstly, a root certification authority (CA) is created. To implement trusting hierachies, and safegaurd the root CA, the host is prompted to create an intermediate CA automatically. This intermediate CA is used to sign other certification on the behalf of the root ca. Moreover, a simple console is created to allow hosts to easily access the various functions and actions they can perform such as viewing certificates, sign them and even revoking signatures. 
+This project deals with the implementation of a certification authority using RSA and Elliptic Curves (EC) as the encryption key and SHA-256 as the hashing algorithm. Firstly, a root certification authority (CA) is created. To implement trusting hierachies, and safegaurd the root CA, the host is prompted to create an intermediate CA automatically. This intermediate CA is used to sign other certification on the behalf of the root ca. Moreover, a simple console is created to allow hosts to easily access the various functions and actions they can perform such as viewing certificates, sign them and even revoking signatures. 
 
 There are 2 roles and databases involved in this project - client and host. The client can both create a certificate they would like a signature for and verify a certificate was signed by the CA. Once the client creates a certificate that requires a signature, they send a request for signature to the host. The host has to first create a root and intermediate CA. The root CA certificate is a self-signed certificate. Thus, the issuer and subject will be the same for this certificate. However,  the intermediate CA certificate will be signed by the root CA certificate. Upon the creation of root and intermediate CA, the intermediate CA can be used to sign the required certificates. Additionally upon signing a certificate, the host can even revoke the signature. This will be updated in the database accordingly.  
 
@@ -28,6 +28,8 @@ CZ4010 Applied Cryptography was our introduction to the field of cryptography or
 We also understood that there was no better way to show off our newfound expertise from this course than to apply it to our project.
 
 ## Research
+Confidentiality, Integrity, Non-repudiation and Authentication are critical concepts revolving around computer security. Public Key Infrastructure (PKI) is a system that achieve the aforementioned security services. Thus, the goal of this project was to implement a certification authority system that can generate and distribute public key certificates.  
+
 
 
 ## Design and Development
@@ -54,7 +56,14 @@ The entire application was developed using the **shell** **script**. As mentione
 
 ### Role of a Client:
 1. Create a certificate to be signed; Similar to the host, the client can also choose an encryption key between RSA and EC. They will also have to set up passwords, select a validity period and enter some details such as the country code, state, locality, common name etc. While some of these fields such as common name are neccessary some of them can be skipped. Additionally, the client has to also provide a domain name for their certificate. 
-3. Verify a certificate was signed by a CA; the client can just type the domain name of the certifiate and verify if it has been signed by the CA. 
+2. Verify a certificate was signed by a CA; the client can just type the domain name of the certifiate and verify if it has been signed by the CA. 
+
+
+## What makes our project unique?
+1. Simple console - the user (host/client) can easily access all the actions they wish to perform.
+2. Autonomy for the users - Both the host and client have a choice regarding the encryption key. The can choose between a RSA or EC encryption key. Moreover, the user can decide how long they would like their certificate to be valid for.
+3. Trusting Hierachy - Upon the creation of the root CA certificate, the console instantly prompts the host to create an intermediate CA certificate. This ensures the safety of the root CA certificate. 
+4. Informative Messages - The entire console is filled with informative messages that guide the user throughout making the application user friendly. 
 
 
 ## The files in this github repository & what they do:
