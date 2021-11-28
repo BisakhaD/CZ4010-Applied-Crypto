@@ -45,9 +45,11 @@ The client/CA are given a choice regarding the encryption key - Rivestâ€“Shamirâ
 ### Role of a CA:
 1. Create a root and intermediate CA by running <br/>  ``` ./main.sh  ```
 2. For the creation of root and intermediate CA certificates, the host can select their choice of the encryption key (RSA/EC) and will then have to set up passwords for each of them and choose the time period of validity (e.g: 3750 days will be 10 years of validity). Certain conditions which are required to be met:
-    - The expiry of the intermediate CA certificate should be earlier than the root CA. If the host types a longer time period of validity for the intermediate CA certificate in comparison to the root CA certificate, the system will automatically set the validity of the intermediate CA certificate to that of the root CA certificate. For the generation of the intermediate CA certificate, a signature from the root CA certificate is required.   
+    - The expiry of the intermediate CA certificate should be earlier than the root CA. If the user types a longer time period of validity for the intermediate CA certificate in comparison to the root CA certificate, the system will automatically set the validity of the intermediate CA certificate to that of the root CA certificate. 
+    - The details of the intermediate CA should match those of the root CA (such as country and organisation names), except for the common name, which must be different. 
+    - For the generation of the intermediate CA certificate, a signature from the root CA certificate is required.   
 4. Upon creation of a root and intermediate CA certificate, these are the following actions a host can perform:
-    - Check of the chain of command is intact
+    - Check if the chain of command is intact
     - View all certificates
     - Sign a certificate
     - Revoke a signature
@@ -56,23 +58,39 @@ The client/CA are given a choice regarding the encryption key - Rivestâ€“Shamirâ
 1. Create a certificate to be signed; Similar to the host, the client can also choose an encryption key between RSA and EC. They will also have to set up passwords, select a validity period and enter some details such as the country code, state, locality, common name etc. While some of these fields such as common names are necessary some of them can be skipped. Additionally, the client has to also provide a domain name for their certificate. 
 2. Verify a certificate was signed by a CA; the client can just type the domain name of the certificate and verify if it has been signed by the CA. 
 
+Example of verying whether a certificate was signed by the CA has been shown below:
+<img width="621" alt="image" src="https://user-images.githubusercontent.com/56753634/143767656-d0bf9e44-5155-4915-ad6f-8fabbc03b158.png">
+
 ### The files in this github repository & what they do:
 The primary files present in the Github Repo are:
-1. **main.sh** : file to be run by the host.
+1. **main.sh** : file to be run by the CAs.
 2. **client.sh** : file to be run by the client.
-3. **purpose.sh** : entails actions that can be performed by the host. The main.sh file calls upon this file once the root and intermediate CA certificates are created.
+3. **purpose.sh** : entails actions that can be performed by the CAs. The main.sh file calls upon this file once the root and intermediate CA certificates are created.
 4. **root_pair_automation.sh** : file to create the root CA. The main.sh file calls this file during the creation of the root CA certificate.
 5. **intermediate/intermediate_automation.sh** : file to create the intermediate CA. The main.sh file calls this file while creating the intermediate CA certificate.
-6. **gen_cert_client.sh** : file to create a certificate signing request. The client.sh file calls upon this file while creating a certificate.
-7. **sign_cert_automation.sh** : file for signing a certificate on the host side. The purpose.sh file calls this file when the host choses to sign a certificate.
+6. **gen_cert_client.sh** : file to create a certificate signing request. The client.sh file calls upon this file while creating a certificate signing request.
+7. **sign_cert_automation.sh** : file for signing a certificate on the CA side. The purpose.sh file calls this file when the host choses to sign a certificate. The client's certificate signing request files are shared with the CA accordingly.
 8. **revocation_automation.sh** : file for revoking a signature. The purpose.sh file calls this file while the host selects to revoke a signature. 
 
 ### How to install and run the project?
 1. Clone the repository
 2. Go to the **openssl.cnf** file and change the directory path to the location of your folder <br/>
-3. Go to **intermediate/openssl.cnf** and change the directory path similar to step 1
-4. Open terminal and grant permission for all files by running **chmod +x (file name)**. For example for the **main.sh** file the command would be: <br/> ``` chmod +x ./main.sh ``` <br />
-5. Follow the following instructions based on the role (host/client).
+3. Go to **intermediate/openssl.cnf** and change the directory path similar to step 2 <br/>
+4. Open terminal and grant permission for the files by running **chmod +x (file name)**. For example for the **main.sh** file the command would be: <br/> ``` chmod +x ./main.sh ``` <br />
+5. If one wants to create a CA, they can run ``` ./main.sh  ```, else if they want to enter as a client, they can run ``` ./client.sh  ```
+
+### Some test case examples 
+This project is fully functional, to the extent tested by us. If you are able to find ways for us to improve, please do not hesitate to drop us an email at ```bisakha001@e.ntu.edu.sg``` or ```ahkshara001@e.ntu.edu.sg```, so that we can learn from our mistakes :)
+
+Here we have tried to list down some of the edge error cases:
+1. Initializing intermediate expiry date as longer than that of root CA
+    <img width="637" alt="image" src="https://user-images.githubusercontent.com/56753634/143768024-3d971745-93b3-408d-91a9-afd762e27b1b.png">
+2. Proving a password that is too small
+    <img width="944" alt="image" src="https://user-images.githubusercontent.com/56753634/143767978-bc081f56-ba25-43c7-8343-e6ad5bf99ebf.png">
+3. Trying to sign an invalid certificate (non-existant, aldready-signed or revoked)
+    <img width="503" alt="image" src="https://user-images.githubusercontent.com/56753634/143767880-9ed6e75c-9b07-4d73-b659-0ab5a8c43263.png">
+4. Revoking a signature that doesn't exist
+    <img width="1099" alt="image" src="https://user-images.githubusercontent.com/56753634/143768143-550838b8-c35c-4834-8ca6-7b415e6f9de2.png">
 
 ## What makes our project unique?
 1. Simple console - the user (host/client) can easily access all the actions they wish to perform.
