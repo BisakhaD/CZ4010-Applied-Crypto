@@ -5,14 +5,14 @@ This project deals with the implementation of a certification authority using RS
 
 There are 2 roles and databases involved in this project - client and host. The client can both create a certificate they would like a signature for and verify a certificate was signed by the CA. Once the client creates a certificate that requires a signature, they send a request for signature to the host. The host has to first create a root and intermediate CA. The root CA certificate is a self-signed certificate. Thus, the issuer and subject will be the same for this certificate. However,  the intermediate CA certificate will be signed by the root CA certificate. Upon the creation of root and intermediate CA, the intermediate CA can be used to sign the required certificates. Additionally upon signing a certificate, the host can even revoke the signature. This will be updated in the database accordingly.  
 
-To explain, how our project works in layman terms we came up with an analogy. 
-
-BD is a girl who is forgetful and someone who cannot keep secrets or gossips whereas AS is someone who loves keeping secrets and never forgets them. One day, BD hears of a gossip and wishes to verify if the information she has heard can be considered as gossip. Thus, she tells this information to AS who verifies if the information can be considered as gossip. Once AS, hears the information and realises it is gossip infact, she gives a thumbs up to BD approving her information as gossip.
-
 The client has to run the **client.sh file** and the host runs the **main.sh** file. 
 
-## Motivation
+To explain, how our project works in layman terms we came up with an analogy. 
 
+BD is a girl who is forgetful and someone who cannot keep secrets or gossips whereas AS is someone who loves keeping secrets and never forgets them. One day, BD hears of a gossip and wishes to verify if the information she has heard can be considered as gossip. Thus, she tells this information to AS who verifies if the information can be considered as gossip. Once AS, hears the information and realises it is gossip infact, she gives a thumbs up to BD approving her information as gossip. This is exactly how our project works as well. BD is the client in this story and AS is the host. 
+
+## Motivation
+### Why did we choose to do this project?
 
 
 ## Research
