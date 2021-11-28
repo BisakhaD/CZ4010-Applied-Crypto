@@ -28,8 +28,7 @@ CZ4010 Applied Cryptography was our introduction to the field of cryptography or
 We also understood that there was no better way to show off our newfound expertise from this course than to apply it to our project.
 
 ## Research
-Confidentiality, Integrity, Non-repudiation and Authentication are critical concepts revolving around computer security. Public Key Infrastructure (PKI) is a system that achieve the aforementioned security services. Thus, the goal of this project was to implement a certification authority system that can generate and distribute public key certificates.  
-
+Confidentiality, Integrity, Non-repudiation and Authentication are critical concepts revolving around computer security. Public Key Infrastructure (PKI) is a system that achieve the aforementioned security services. Thus, the goal of this project was to implement a certification authority system that can generate and distribute public key certificates. 
 
 
 ## Design and Development
