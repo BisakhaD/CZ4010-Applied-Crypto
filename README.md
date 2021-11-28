@@ -28,7 +28,9 @@ CZ4010 Applied Cryptography was our introduction to the field of cryptography or
 We also understood that there was no better way to show off our newfound expertise from this course than to apply it to our project.
 
 ## Research
-Confidentiality, Integrity, Non-repudiation and Authentication are critical concepts revolving around computer security. Public Key Infrastructure (PKI) is a system that achieve the aforementioned security services. Thus, the goal of this project was to implement a certification authority system that can generate and distribute public key certificates. 
+Confidentiality, Integrity, Non-repudiation and Authentication are critical concepts revolving around computer security. Public Key Infrastructure (PKI) is a system that achieves the aforementioned security services. Thus, the goal of this project was to implement a certification authority system that can generate and distribute public key certificates. Certification Authority is an entity that issues digital certificates as a validation of the clients identity. Without this, anything done online will be unsafe and all data entered on an online web service can be obtained by hackers. 
+
+
 
 
 ## Design and Development
@@ -76,4 +78,9 @@ The primary files present in the github repo are:
 7. **sign_cert_automation.sh** : file for signing a certificate on the host side. The purpose.sh file calls this file when the host choses to sign a certificate.
 8. **revocation_automation.sh** : file for revoking a signature. The purpose.sh file calls this file while the host selects to revoke a signature. 
 
+## References 
+[^1] Aas, Josh, et al. "Let's Encrypt: an automated certificate authority to encrypt the entire web." Proceedings of the 2019 ACM SIGSAC Conference on Computer and Communications Security. 2019.
+[^2]  Al-Janabi, Sufyan Faraj, and Amer Kais Obaid. "Development of certificate authority services for web applications." 2012 International Conference on Future Communication Networks. IEEE, 2012.
+[^3] Dong, Y., et al. "Providing distributed certificate authority service in mobile ad hoc networks." First International Conference on Security and Privacy for Emerging Areas in Communications Networks (SECURECOMM'05). IEEE, 2005.
+[^4] Cano, Maria-Dolores, Ruben Toledo-Valera, and Fernando Cerdan. "A certification authority for elliptic curve X. 509v3 certificates." International Conference on Networking and Services (ICNS'07). IEEE, 2007.
 
