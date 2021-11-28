@@ -45,7 +45,7 @@ The client/CA are given a choice regarding the encryption key - Rivestâ€“Shamirâ
 ### Role of a CA:
 1. Create a root and intermediate CA by running <br/>  ``` ./main.sh  ```
 2. For the creation of root and intermediate CA certificates, the host can select their choice of the encryption key (RSA/EC) and will then have to set up passwords for each of them and choose the time period of validity (e.g: 3750 days will be 10 years of validity). Certain conditions which are required to be met:
-    *The expiry of the intermediate CA certificate should be earlier than the root CA. If the host types a longer time period of validity for the intermediate CA certificate in comparison to the root CA certificate, the system will automatically set the validity of the intermediate CA certificate to that of the root CA certificate. For the generation of the intermediate CA certificate, a signature from the root CA certificate is required.   
+    - The expiry of the intermediate CA certificate should be earlier than the root CA. If the host types a longer time period of validity for the intermediate CA certificate in comparison to the root CA certificate, the system will automatically set the validity of the intermediate CA certificate to that of the root CA certificate. For the generation of the intermediate CA certificate, a signature from the root CA certificate is required.   
 4. Upon creation of a root and intermediate CA certificate, these are the following actions a host can perform:
     - Check of the chain of command is intact
     - View all certificates
