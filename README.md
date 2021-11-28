@@ -1,4 +1,4 @@
-# CZ4010 Applied Cryptography - Implementing a Certification Authority
+# Implementing a Certification Authority
 
 ## Project Description
 This project deals with the implementation of a certification authority using RSA and Elliptic Curves (EC) as the encryption key and SHA-256 as the hashing algorithm.  Firstly, a root certification authority (CA) is created. To implement trusting hierachies, and safegaurd the root CA, the host is prompted to create an intermediate CA automatically. This intermediate CA is used to sign other certification on the behalf of the root ca. Moreover, a simple console is created to allow hosts to easily access the various functions and actions they can perform such as viewing certificates, sign them and even revoking signatures. 
@@ -11,10 +11,21 @@ To explain, how our project works in layman terms we came up with an analogy. Ho
 
 BD is a girl who is forgetful and someone who cannot keep secrets or gossips whereas AS is someone who loves keeping secrets and never forgets them. One day, BD hears of a gossip and wishes to verify if the information she has heard can be considered as gossip. Thus, she tells this information to AS who verifies if the information can be considered as gossip. Once AS, hears the information and realises it is gossip infact, she gives a thumbs up to BD approving her information as gossip. This is exactly how our project works as well. BD is the client in this story and AS is the host. 
 
-## Motivation
-CZ4010 Applied Cryptography was our introduction to the field of cryptography or computer security in general.
-### Why did we choose to do this project?
+## Motivations
+CZ4010 Applied Cryptography was our introduction to the field of cryptography or computer security in general. Prior to this course, we had a very rudimentary understanding regarding computer security and thus this course was. huge challenge itself. While we were fascinated by all the new concepts we have learnt in this course, something that instantly captivated us was the Diffie-Hellman Key Excahnge taught to us in Week 8 of this course. Building up on those concepts we were later introduced to RSA and EC as well. Even as we were watching the lectures, we knew we wanted to experiment with these ideas and see what we could come up with. This is one of the main reasons we decided to pursue the idea of implementing a certification authority. At first we decided to diverge beyond the course curriculum and try different encryption keys. However, after a comprehensive background research we realised that RSA and EC would be our best choice. This is owing to a number of factors, including the fact that they are well-established, generally compatible, and easy to apply. Below are a few pointers on why we chose the following encryption keys:
 
+#### RSA
+1. Widely Compatiable
+2. Fast and Simple Encryption
+3. Well Established
+
+
+#### Elliptic Curve
+1. Lower Computational Resources
+2. Smaller Certification Sizes
+3. Stronger for a smaller key size in comparison to RSA
+
+We also understood that there was no better way to show off our newfound expertise from this course than to apply it to our project.
 
 ## Research
 
