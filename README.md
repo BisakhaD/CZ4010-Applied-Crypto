@@ -7,11 +7,12 @@ There are 2 roles and databases involved in this project - client and host. The 
 
 The client has to run the **client.sh file** and the host runs the **main.sh** file. 
 
-To explain, how our project works in layman terms we came up with an analogy. 
+To explain, how our project works in layman terms we came up with an analogy. Hope you like it :) 
 
 BD is a girl who is forgetful and someone who cannot keep secrets or gossips whereas AS is someone who loves keeping secrets and never forgets them. One day, BD hears of a gossip and wishes to verify if the information she has heard can be considered as gossip. Thus, she tells this information to AS who verifies if the information can be considered as gossip. Once AS, hears the information and realises it is gossip infact, she gives a thumbs up to BD approving her information as gossip. This is exactly how our project works as well. BD is the client in this story and AS is the host. 
 
 ## Motivation
+CZ4010 Applied Cryptography was our introduction to the field of cryptography or computer security in general.
 ### Why did we choose to do this project?
 
 
