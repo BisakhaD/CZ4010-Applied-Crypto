@@ -6,7 +6,7 @@ This project dealt with the implementation of a certification authority using RS
 ## How to install and run the project?
 1. Go to openssl.cnf file and change the directory path to the location of your folder <br/>
 2. Go to intermediate/openssl.cnf and change the directory path similar to step 1
-3. Open terminal and grant permission for all files by running "chmod +x (file name)" For example, 
+3. Open terminal and grant permission for all files by running "chmod +x (file name)" For example, <br/>
 ``` chmod +x ./main.sh ```
 
 clone this repo <br />
